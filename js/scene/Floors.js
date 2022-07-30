@@ -33,7 +33,7 @@ class Floors {
 		let floors = {
 			0: {
 				name: 'groundZero',
-				size: { x: 64, y: 64, z: .2 },
+				size: { x: 128, y: 64, z: .2 },
 				position: { x: -32, y: -32, z: -.1 },
 				color: 0xFFFFFF,
 				receiveShadow: true
