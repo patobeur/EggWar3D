@@ -1,2 +1,3 @@
 # EggWar3D
-new try
+
+https://patobeur.github.io/EggWar3D/
