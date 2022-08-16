@@ -59,7 +59,9 @@ class Game {
 
 		// --
 
-		this.#PlayerManager = new PlayerManager(0, 0, 0, "player", this.#Config, this.#FrontM, this.#Camera)
+		this.#PlayerManager = new PlayerManager(
+			0, 0, 0,
+			this.#Config, this.#FrontM, this.#Camera,this.#Scene)
 
 		let playerPos = this.#PlayerManager.playerGroupe.position;
 
@@ -73,7 +75,7 @@ class Game {
 
 		this.MobsManager = new Mobs(this.#Config)
 
-		this.allMobs = this.MobsManager.addMobs(25, 'mobs')
+		this.allMobs = this.MobsManager.addMobs(1, 'mobs')
 
 		this.allMobs.forEach(mob => {
 			this.#Scene.add(mob.mesh)

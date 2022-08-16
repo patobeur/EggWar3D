@@ -4,8 +4,10 @@ class PlayerManager {
 	#PlayerConfig
 	#Camera
 	#FrontM
-	constructor(x = 0, y = 0, z = 0, type = "player", Config, FrontM, Camera) {
-		this.type = type;
+	constructor(x = 0, y = 0, z = 0, Config, FrontM, Camera,Scene) {
+		this.scene = Scene
+
+		this.type = 'player';
 		this.#Config = Config;
 		this.ControlsM = new ControlsManager(this.type, this.#Config);
 
@@ -44,7 +46,9 @@ class PlayerManager {
 
 		this.largeur = 1;
 		this.longueur = 1;
-		this.hauteur = 1;
+		this.hauteur = 1; 
+
+		this.missiles= [];
 
 		// this.rotatioYAngle = THREE.Math.degToRad(1); // 1deg
 
@@ -227,17 +231,29 @@ class PlayerManager {
 	// ----------------------------------------------------------------------------------
 	#shoot(skillname) {
 		if (this.ControlsM) {
-			// if (this.missiles.length < 5) {
-			// let skill = new SkillsManager(skillname, this.playerGroupe.position, this.playerGroupe.rotation, this.hauteur)
-			// // console.log(skill.skillDatas.recastTimer)
-			// // console.log(skill.birthDay - new Date())
-			// if (skill.skillDatas.energyCost < this.stats.energy.current) {
-			// 	this.stats.energy.current -= skill.skillDatas.energyCost
-			// 	if (this.FrontM) {
-			// 		this.FrontM.refresh('energy', this.stats.energy.current)
-			// 	}
-			// 	skill.init();
-			// }
+			if (this.missiles.length < 5) {
+				let skill = new SkillsManager(
+					skillname, 
+					this.playerGroupe.position, 
+					this.playerGroupe.rotation, 
+					this.hauteur,
+					this.scene
+				);
+				
+				console.log('--------------------------------')
+				// console.log(skill.skillDatas.recastTimer)
+				// console.log(skill.birthDay - new Date())
+				console.log(new Date())
+				console.log(skill)
+				if (skill.skillDatas.energyCost < this.stats.energy.current) {
+					this.stats.energy.current -= skill.skillDatas.energyCost;
+					if (this.FrontM) {
+						this.FrontM.refresh('energy', this.stats.energy.current)
+					}
+					skill.init();
+				}
+
+			}
 		}
 	}
 	#updateShoots() {
