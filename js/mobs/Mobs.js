@@ -20,7 +20,7 @@ class Mobs {
 				name,
 				mobType ?? 'mobs'
 			)
-			this.addtempodivs(i, mob)
+			// this.addtempodivs(i, mob)
 		}
 		// mobNames.forEach(name => {
 		// 	let mob = this.addOne(name, mobType)
@@ -96,12 +96,12 @@ class Mobs {
 	get_distanceFromPlayer(playerPosition, mob) {
 		let dist = mob.bbox.distanceToPoint(othermob.mesh.position)
 	}
-	addtempodivs(i, mob) { // this need to be remove
-		let tempo_mobdiv = document.createElement('div')
-		tempo_mobdiv.id = 'mob_' + i
-		tempo_mobdiv.textContent = '++' + mob.conf.nickname
-		document.getElementById('lesmobs').appendChild(tempo_mobdiv)
-	}
+	// addtempodivs(i, mob) { // this need to be remove
+	// 	let tempo_mobdiv = document.createElement('div')
+	// 	tempo_mobdiv.id = 'mob_' + i
+	// 	tempo_mobdiv.textContent = '++' + mob.conf.nickname
+	// 	document.getElementById('lesmobs').appendChild(tempo_mobdiv)
+	// }
 	get_AName(length) {
 		let lettreMIN = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 		let name = ''

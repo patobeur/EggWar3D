@@ -1,6 +1,7 @@
 "use strict";
 class FrontboardManager {
 	constructor(stats = false) {
+		console.log("FrontboardManager stats", stats)
 		// this.activated = false;
 		this.stats = stats;
 		this.board;
@@ -11,6 +12,10 @@ class FrontboardManager {
 		this.#setFrontStat()
 	}
 	refresh(statname, value) {
+		// console.log("value", value)
+		// console.log("statname", statname)
+		// console.log("this.stats", this.stats)
+		// console.log("this.stats[statname]", this.stats[statname])
 		this.stats[statname].current = value
 		let centage = (this.stats[statname].current / this.stats[statname].max) * 100
 		this.stats[statname].divcurrent.style.width = centage + '%'

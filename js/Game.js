@@ -30,8 +30,16 @@ class Game {
 		if (conslog) console.log('Game Mounting !')
 		//
 		this.#Config = new Config()
+		// console.log("this.#Config", this.#Config)
 		//
-		this.#FrontM = new FrontboardManager();
+
+		this.stats = {
+			hp: { name: 'Hit Point', current: 25, max: 100, regen: .1, backgroundColor: 'rgba(250, 59, 9, 0.644)' },
+			energy: { name: 'Energy', current: 100, max: 100, regen: 1.5, backgroundColor: 'rgba(9, 223, 20, 0.644)' },
+			def: { name: 'defense', current: 1, max: 100, regen: 3, backgroundColor: 'rgba(9, 59, 223, 0.644)' }
+		}
+
+		this.#FrontM = new FrontboardManager(this.stats);
 
 		this.#Formula = new Formula();
 
@@ -86,7 +94,7 @@ class Game {
 
 
 
-		console.log('#PlayerManager', this.#PlayerManager)
+		// console.log('#PlayerManager', this.#PlayerManager)
 
 
 
@@ -129,7 +137,7 @@ class Game {
 								console.log('<-- fin de collision avec ' + mob.conf.nickname)
 								mob.mobMesh.material.color = mob.conf.states.collide.color.saved
 								mob.conf.states.collide.changed = false
-								document.getElementById(['mob_' + i]).textContent = Math.floor(dist * 10) / 10
+								// document.getElementById(['mob_' + i]).textContent = Math.floor(dist * 10) / 10
 								mob.conf.states.collide.color.saved = false
 								mob.conf.states.collide.color.current = false
 							}
@@ -140,7 +148,7 @@ class Game {
 						if (mob.conf.states.collide.changed === false) {
 							mob.conf.states.collide.color.saved = mob.mobMesh.material.color
 							mob.conf.states.collide.changed = true
-							document.getElementById(['mob_' + i]).textContent = Math.floor(dist * 10) / 10
+							// document.getElementById(['mob_' + i]).textContent = Math.floor(dist * 10) / 10
 							mob.mobMesh.material.color = this.#PlayerManager.PlayerMesh.material.color
 							//{ r: 1, g: 1, b: 1 }
 							console.log('--> début de collision avec ' + mob.conf.nickname)

@@ -4,7 +4,7 @@ class PlayerManager {
 	#PlayerConfig
 	#Camera
 	#FrontM
-	constructor(x = 0, y = 0, z = 0, Config, FrontM, Camera,Scene) {
+	constructor(x = 0, y = 0, z = 0, Config, FrontM, Camera, Scene) {
 		this.scene = Scene
 
 		this.type = 'player';
@@ -46,9 +46,9 @@ class PlayerManager {
 
 		this.largeur = 1;
 		this.longueur = 1;
-		this.hauteur = 1; 
+		this.hauteur = 1;
 
-		this.missiles= [];
+		this.missiles = [];
 
 		// this.rotatioYAngle = THREE.Math.degToRad(1); // 1deg
 
@@ -91,7 +91,7 @@ class PlayerManager {
 		this.#addPlayerOrbiter({ x: -.5, y: 0, z: .5 }, { x: .25, y: .25, z: .25 });
 	}
 	update() {
-		console.log('player update----------------------------------------------')
+		console.log('player update -->')
 		this.#playerMoveActions();
 		this.#updateShoots();
 		if (this.playerOrbiter) {
@@ -136,9 +136,13 @@ class PlayerManager {
 				if (this.stats[key].regen) {
 					if (this.stats[key].current <= this.stats[key].max - this.stats[key].regen) {
 						this.stats[key].current += this.stats[key].regen
-						if (this.type === "PLAYER") {
-							this.FrontM.refresh(key, this.stats[key].current)
+						// if (this.type === "PLAYER") {
+						//console.log("PLAYER PLAYERPLAYER PLAYERPLAYER PLAYERPLAYER PLAYERPLAYER PLAYERPLAYER PLAYERPLAYER PLAYERPLAYER PLAYERPLAYER PLAYERPLAYER PLAYERPLAYER PLAYERPLAYER PLAYERPLAYER PLAYERPLAYER PLAYER")
+						if (this.#FrontM) {
+							this.#FrontM.refresh(key, this.stats[key].current)
 						}
+						else { console.log('no this.#FrontM') }
+						// }
 					}
 				}
 			}
@@ -233,22 +237,22 @@ class PlayerManager {
 		if (this.ControlsM) {
 			if (this.missiles.length < 5) {
 				let skill = new SkillsManager(
-					skillname, 
-					this.playerGroupe.position, 
-					this.playerGroupe.rotation, 
+					skillname,
+					this.playerGroupe.position,
+					this.playerGroupe.rotation,
 					this.hauteur,
 					this.scene
 				);
-				
-				console.log('--------------------------------')
+
+				// console.log('--------------------------------')
 				// console.log(skill.skillDatas.recastTimer)
 				// console.log(skill.birthDay - new Date())
-				console.log(new Date())
-				console.log(skill)
+				// console.log(new Date())
+				// console.log(skill)
 				if (skill.skillDatas.energyCost < this.stats.energy.current) {
 					this.stats.energy.current -= skill.skillDatas.energyCost;
-					if (this.FrontM) {
-						this.FrontM.refresh('energy', this.stats.energy.current)
+					if (this.#FrontM) {
+						this.#FrontM.refresh('energy', this.stats.energy.current)
 					}
 					skill.init();
 				}
