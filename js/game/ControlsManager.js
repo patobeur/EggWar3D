@@ -27,15 +27,15 @@ class ControlsManager {
 		this.sright = false;
 
 		this.#touchDeviceActive = this.#isTouchDevice(); // TouchDeviceActive
-			if (this.#touchDeviceActive) {
-				console.log('touch device on !')
-				this.#TouchM = new TouchMe(this);
-			}
-			else {
-				console.log('keyboard\'n\'mouse on !')
-				this.#addKeyboardListeners();
-				this.#addMouseListeners();
-			}
+		if (this.#touchDeviceActive) {
+			console.log('touch device on !')
+			this.#TouchM = new TouchMe(this);
+		}
+		else {
+			console.log('keyboard\'n\'mouse on !')
+			this.#addKeyboardListeners();
+			this.#addMouseListeners();
+		}
 		this.scale = 1
 	}
 	#isTouchDevice() {
@@ -52,12 +52,12 @@ class ControlsManager {
 		document.body.appendChild(target)
 
 		document.documentElement.oncontextmenu = (event) => {
-			console.log('shoot2')
+			console.log('right click')
 			event.preventDefault();
 			this.shoot2 = true;
 		}
 		document.documentElement.onclick = (event) => {
-			console.log('shoot1')
+			console.log('left click')
 			this.shoot1 = true;
 		}
 		// document.documentElement.onwheel = (event) => {

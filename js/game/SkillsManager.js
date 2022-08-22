@@ -113,7 +113,6 @@ class SkillsManager {
 		this.skillDatas.y = nextPos.y
 	}
 	#applyRotationOnMesh() {
-
 		// if (this.skillDatas.rotation) this.mesh.rotation.z = this.skillDatas.rotation;
 		if (this.skillDatas.rotation) this.mesh.rotation.z = this.skillDatas.rotation;
 	}

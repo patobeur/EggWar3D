@@ -1,4 +1,4 @@
-class Config {
+class GameConfig {
 	version = 0.000001;
 	sceneName = 'EggWar3D';
 	canvasId = 'game';

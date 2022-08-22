@@ -49,6 +49,9 @@ class FrontboardManager {
 		}
 		document.body.appendChild(this.board)
 		let stringCss = '.mire,.target {position: absolute;height: 20px;width: 20px;left: calc(50% - 10px);top: calc(50% - 10px);border-radius: 50%;}.mire {display: none;background-color: rgba(153, 205, 50, 0.493);}.target {background-color: rgba(248, 234, 33, 0.459);}'
+		stringCss += '.board{position: absolute;background-color: rgba(0, 0, 255, 0.644);top: .0;left:0;width:75px;height:75px;display:flex;flex-direction: column;}'
+		stringCss += '.stat{width:100%;height:33%;display:flex;background-color: rgba(34, 34, 88, 0.644);border: 1px solid rgb(0, 0, 0);}'
+		stringCss += '.current{height:100%;}'
 		addCss(stringCss, 'miretarget')
 	}
 }

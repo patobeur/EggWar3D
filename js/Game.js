@@ -2,7 +2,7 @@ const conslog = false;
 class Game {
 	#pause = false;
 	#WindowActive;
-	#Config;
+	#GConfig;
 	#Scene; #Camera; #Renderer;
 	#OrbitControls;
 	#Dom;
@@ -29,8 +29,8 @@ class Game {
 		if (conslog) console.log('affichage actif:', conslog)
 		if (conslog) console.log('Game Mounting !')
 		//
-		this.#Config = new Config()
-		// console.log("this.#Config", this.#Config)
+		this.#GConfig = new GameConfig()
+		// console.log("this.#GConfig", this.#GConfig)
 		//
 
 		this.stats = {
@@ -43,7 +43,7 @@ class Game {
 
 		this.#Formula = new Formula();
 
-		this.#SceneManager = new SceneManager(this.#Config);
+		this.#SceneManager = new SceneManager(this.#GConfig);
 
 		this.#Scene = this.#SceneManager.get_Scene()
 		this.#Camera = this.#SceneManager.get_Camera()
@@ -70,7 +70,7 @@ class Game {
 
 		this.#PlayerManager = new PlayerManager(
 			0, 0, 0,
-			this.#Config, this.#FrontM, this.#Camera, this.#Scene)
+			this.#GConfig, this.#FrontM, this.#Camera, this.#Scene)
 
 		let playerPos = this.#PlayerManager.playerGroupe.position;
 
@@ -82,7 +82,7 @@ class Game {
 		// this.#CHATFACTORY = new ChatBotFactory();
 
 
-		this.MobsManager = new Mobs(this.#Config)
+		this.MobsManager = new Mobs(this.#GConfig)
 
 		this.allMobs = this.MobsManager.addMobs(this.HowManyMobs, 'mobs')
 
@@ -104,9 +104,9 @@ class Game {
 	#setCameraPositionOnPlayer() {
 		// let player = this.#PlayerManager.playerGroupe.position;
 		// this.#camera.position.set(
-		// 	player.x + this.#Config.get_camera('decalage').x,
-		// 	player.y + this.#Config.get_camera('decalage').y,
-		// 	player.z + this.#Config.get_camera('decalage').z
+		// 	player.x + this.#GConfig.get_camera('decalage').x,
+		// 	player.y + this.#GConfig.get_camera('decalage').y,
+		// 	player.z + this.#GConfig.get_camera('decalage').z
 		// );
 		// this.#camera.lookAt(player.x, player.y, player.z);
 	}

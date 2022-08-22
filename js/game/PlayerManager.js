@@ -1,18 +1,26 @@
 "use strict";
 class PlayerManager {
-	#Config;
-	#PlayerConfig
+	#GConfig;
+	#PConfig
 	#Camera
 	#FrontM
-	constructor(x = 0, y = 0, z = 0, Config, FrontM, Camera, Scene) {
+	constructor(x = 0, y = 0, z = 0, GConfig, FrontM, Camera, Scene) {
+		this.stats = {
+			hp: { name: 'Hit Point', current: 25, max: 100, regen: .1, backgroundColor: 'rgba(250, 59, 9, 0.644)' },
+			energy: { name: 'Energy', current: 100, max: 100, regen: 1.5, backgroundColor: 'rgba(9, 223, 20, 0.644)' },
+			def: { name: 'defense', current: 1, max: 100, regen: 3, backgroundColor: 'rgba(9, 59, 223, 0.644)' }
+		}
 		this.scene = Scene
 
 		this.type = 'player';
-		this.#Config = Config;
-		this.ControlsM = new ControlsManager(this.type, this.#Config);
+		this.#GConfig = GConfig;
+		this.#PConfig = new PlayerConfig();
+
+
+
+		this.ControlsM = new ControlsManager(this.type, this.#GConfig);
 
 		this.#FrontM = FrontM;
-		this.#PlayerConfig = new PlayerConfig();
 		this.Formula = new Formula();
 		this.#Camera = Camera
 
@@ -29,11 +37,6 @@ class PlayerManager {
 		// this.canonPosition.set(0, .5, 0);
 		this.playerMeshName = "Noob";
 
-		this.stats = {
-			hp: { name: 'Hit Point', current: 25, max: 100, regen: .1, backgroundColor: 'rgba(250, 59, 9, 0.644)' },
-			energy: { name: 'Energy', current: 100, max: 100, regen: 1.5, backgroundColor: 'rgba(9, 223, 20, 0.644)' },
-			def: { name: 'defense', current: 1, max: 100, regen: 3, backgroundColor: 'rgba(9, 59, 223, 0.644)' }
-		}
 		this.regenTimer = { current: 0, max: 10 };
 
 		this.damaged = false;
@@ -48,8 +51,6 @@ class PlayerManager {
 		this.longueur = 1;
 		this.hauteur = 1;
 
-		this.missiles = [];
-
 		// this.rotatioYAngle = THREE.Math.degToRad(1); // 1deg
 
 		// this.rotation = {
@@ -61,9 +62,10 @@ class PlayerManager {
 		this.castShadow = true;
 		this.rotatioYAngle = 0;
 
-		this.playerColor = this.#PlayerConfig.get_value('playerColor');
+		this.playerColor = this.#PConfig.get_value('playerColor');
 
 		this.torche = this.getTorchlight();
+		this.#addPlayerOrbiter({ x: -.5, y: 0, z: .5 }, { x: .25, y: .25, z: .25 });
 
 		this.#init();
 		this.#init_camera();
@@ -72,9 +74,9 @@ class PlayerManager {
 	#init_camera() {
 
 		this.#Camera.position.set(
-			this.#Config.get_camera('decalage').x + this.playerGroupe.position.x,
-			this.#Config.get_camera('decalage').y + this.playerGroupe.position.y,
-			this.#Config.get_camera('decalage').z + this.playerGroupe.position.z
+			this.#GConfig.get_camera('decalage').x + this.playerGroupe.position.x,
+			this.#GConfig.get_camera('decalage').y + this.playerGroupe.position.y,
+			this.#GConfig.get_camera('decalage').z + this.playerGroupe.position.z
 		);
 		this.#Camera.lookAt = (new THREE.Vector3(this.playerGroupe.position.x, this.playerGroupe.position.y, this.playerGroupe.position.z));
 
@@ -86,9 +88,12 @@ class PlayerManager {
 
 
 		// SkillsManager
+		this.missiles = [];
+
 		this.skillsInUse = []
 		this.SkillsImmat = this.skillsInUse.length - 1;
-		this.#addPlayerOrbiter({ x: -.5, y: 0, z: .5 }, { x: .25, y: .25, z: .25 });
+
+
 	}
 	update() {
 		console.log('player update -->')
@@ -207,9 +212,9 @@ class PlayerManager {
 				if (this.ControlsM.left) { this.playerGroupe.position.x -= speed }//; direction.angle = 90 }
 				if (this.ControlsM.right) { this.playerGroupe.position.x += speed }//; direction.angle = 270 }
 				this.#Camera.position.set(
-					this.#Config.get_camera('decalage').x + this.playerGroupe.position.x,
-					this.#Config.get_camera('decalage').y + this.playerGroupe.position.y,
-					this.#Config.get_camera('decalage').z + this.playerGroupe.position.z
+					this.#GConfig.get_camera('decalage').x + this.playerGroupe.position.x,
+					this.#GConfig.get_camera('decalage').y + this.playerGroupe.position.y,
+					this.#GConfig.get_camera('decalage').z + this.playerGroupe.position.z
 				);
 				// this.#Camera.lookAt.set(
 				// 	this.playerGroupe.position.x,
